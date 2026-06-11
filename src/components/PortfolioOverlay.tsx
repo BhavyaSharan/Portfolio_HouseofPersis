@@ -1,24 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowLeft, ExternalLink, Code2, AtSign, Globe } from 'lucide-react';
 
-// ─── Scroll reveal hook ──────────────────────────────────────────────────
-function useScrollReveal(containerRef: React.RefObject<HTMLDivElement | null>) {
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-    const observer = new IntersectionObserver(
-      (entries) => entries.forEach(en => {
-        if (en.isIntersecting) {
-          en.target.classList.add('is-visible');
-        }
-      }),
-      { threshold: 0.12, rootMargin: '0px 0px -40px 0px', root: container }
-    );
-    const els = container.querySelectorAll('.reveal-on-scroll');
-    els.forEach(el => observer.observe(el));
-    return () => observer.disconnect();
-  }, [containerRef]);
-}
 
 // ─── Portfolio data per figurine ─────────────────────────────────────────────
 export const PORTFOLIO_DATA = [
