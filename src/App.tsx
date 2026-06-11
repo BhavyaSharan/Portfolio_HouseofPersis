@@ -572,11 +572,11 @@ export default function ToonHub() {
               }}>
               TEAM HOP
             </p>
-            <p className="hidden sm:block text-sm mb-4 sm:mb-5"
+            <p className="text-xs sm:text-sm"
               key={activeIndex}
               style={{
                 color: 'white', opacity: 0.92, lineHeight: 1.6, margin: 0,
-                marginBottom: '1.25rem', textShadow: '0 1px 4px rgba(0,0,0,0.25)',
+                marginBottom: isMobile ? '0.75rem' : '1.25rem', textShadow: '0 1px 4px rgba(0,0,0,0.25)',
                 fontStyle: 'italic', letterSpacing: '0.01em',
                 animation: 'punchlineFade 500ms ease forwards'
               }}>
