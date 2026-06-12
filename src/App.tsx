@@ -188,25 +188,25 @@ export default function ToonHub() {
       switch (role) {
         case 'center':
           base = {
-            left: '50%', bottom: isMobile ? '22%' : '0', height: isMobile ? '60%' : '92%',
-            transform: `translateX(-50%) scale(${isMobile ? 1.25 : 1.68})`, filter: 'none', opacity: 1, zIndex: 20, transition, willChange
+            left: '50%', bottom: isMobile ? '0%' : '0', height: isMobile ? '72%' : '92%',
+            transform: `translateX(-50%) scale(${isMobile ? 1 : 1.68})`, filter: 'none', opacity: 1, zIndex: 20, transition, willChange
           };
           break;
         case 'left':
           base = {
-            left: isMobile ? '20%' : '30%', bottom: isMobile ? '32%' : '12%', height: isMobile ? '16%' : '28%',
+            left: isMobile ? '20%' : '30%', bottom: isMobile ? '12%' : '12%', height: isMobile ? '18%' : '28%',
             transform: 'translateX(-50%) scale(1)', filter: 'blur(2px)', opacity: 0.85, zIndex: 10, transition, willChange
           };
           break;
         case 'right':
           base = {
-            left: isMobile ? '80%' : '70%', bottom: isMobile ? '32%' : '12%', height: isMobile ? '16%' : '28%',
+            left: isMobile ? '80%' : '70%', bottom: isMobile ? '12%' : '12%', height: isMobile ? '18%' : '28%',
             transform: 'translateX(-50%) scale(1)', filter: 'blur(2px)', opacity: 0.85, zIndex: 10, transition, willChange
           };
           break;
         default:
           base = {
-            left: '50%', bottom: isMobile ? '32%' : '12%', height: isMobile ? '13%' : '22%',
+            left: '50%', bottom: isMobile ? '12%' : '12%', height: isMobile ? '14%' : '22%',
             transform: 'translateX(-50%) scale(1)', filter: 'blur(4px)', opacity: 1, zIndex: 5, transition, willChange
           };
       }
@@ -431,7 +431,7 @@ export default function ToonHub() {
         }}
       >
         <div
-          style={{ position: 'relative', width: '100%', height: '100vh', overflow: 'hidden' }}
+          style={{ position: 'relative', width: '100%', height: '100svh', overflow: 'hidden' }}
           onMouseDown={e => onDragStart(e.clientX)}
           onMouseUp={e => onDragEnd(e.clientX)}
           onMouseLeave={() => { document.body.classList.remove('dragging'); dragStartX.current = null; }}
@@ -554,74 +554,126 @@ export default function ToonHub() {
             })}
           </div>
 
-          {/* 5. Bottom-left info + nav */}
-          <div className="absolute bottom-6 left-4 right-4 p-3.5 sm:p-6 sm:bottom-20 sm:left-24 sm:right-auto sm:max-w-[320px]"
+          {/* 5. Bottom info + nav card */}
+          <div
             style={{
-              zIndex: 60, background: 'rgba(0,0,0,0.22)',
-              backdropFilter: 'blur(6px)', WebkitBackdropFilter: 'blur(6px)', borderRadius: 16,
+              position: 'absolute',
+              left: 0, right: 0, bottom: 0,
+              zIndex: 60,
               opacity: isPortalActive ? Math.max(0, 1 - smokeProgress * 3) : 1,
               pointerEvents: isPortalActive ? 'none' : 'auto',
-              transition: isPortalActive ? 'none' : 'opacity 300ms'
-            }}>
-            <p className="mb-2 sm:mb-3 text-base sm:text-[22px]"
+              transition: isPortalActive ? 'none' : 'opacity 300ms',
+              /* Desktop: move to left/bottom corner */
+            }}
+            className="sm:left-auto sm:right-auto sm:bottom-20 sm:absolute"
+          >
+            {/* Mobile card — stretches full width, sits at bottom */}
+            <div
+              className="sm:hidden"
               style={{
+                background: 'rgba(0,0,0,0.30)',
+                backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)',
+                padding: '14px 16px 20px',
+                paddingBottom: 'calc(20px + env(safe-area-inset-bottom, 0px))',
+                borderTop: '1px solid rgba(255,255,255,0.08)',
+              }}
+            >
+              <p style={{
+                fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.02em',
+                color: 'white', opacity: 1, margin: 0, marginBottom: '4px',
+                textShadow: '0 1px 6px rgba(0,0,0,0.3)', fontSize: '15px'
+              }}>
+                TEAM HOP
+              </p>
+              <p
+                key={activeIndex}
+                style={{
+                  color: 'white', opacity: 0.88, lineHeight: 1.5, margin: 0,
+                  marginBottom: '12px', textShadow: '0 1px 4px rgba(0,0,0,0.25)',
+                  fontStyle: 'italic', letterSpacing: '0.01em', fontSize: '12px',
+                  animation: 'punchlineFade 500ms ease forwards'
+                }}
+              >
+                {active.punchline}
+              </p>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <div style={{ display: 'flex', gap: '10px' }}>
+                  {(['prev', 'next'] as Direction[]).map((dir) => (
+                    <button key={dir} onClick={() => navigate(dir)}
+                      aria-label={dir === 'prev' ? 'Previous figurine' : 'Next figurine'}
+                      style={{
+                        width: 44, height: 44, borderRadius: '50%',
+                        background: 'transparent', border: '2px solid rgba(255,255,255,0.8)', color: 'white',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        cursor: 'pointer', flexShrink: 0, transition: 'background 150ms'
+                      }}>
+                      {dir === 'prev' ? <ArrowLeft size={18} strokeWidth={2.25} /> : <ArrowRight size={18} strokeWidth={2.25} />}
+                    </button>
+                  ))}
+                </div>
+                <button onClick={handleDiscover}
+                  style={{
+                    display: 'flex', alignItems: 'center', gap: '4px',
+                    fontFamily: "'Anton', sans-serif", fontSize: '18px',
+                    fontWeight: 400, color: 'white', letterSpacing: '-0.02em',
+                    lineHeight: 1, textTransform: 'uppercase', background: 'none', border: 'none',
+                    cursor: 'pointer', padding: 0, opacity: 0.95
+                  }}>
+                  DISCOVER IT
+                  <ArrowRight size={18} strokeWidth={2.25} />
+                </button>
+              </div>
+            </div>
+
+            {/* Desktop card — compact floating box */}
+            <div
+              className="hidden sm:block"
+              style={{
+                background: 'rgba(0,0,0,0.22)',
+                backdropFilter: 'blur(6px)', WebkitBackdropFilter: 'blur(6px)',
+                borderRadius: 16, padding: '20px 24px', maxWidth: 320,
+                marginLeft: '6rem'
+              }}
+            >
+              <p style={{
                 fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.02em',
                 color: 'white', opacity: 1, margin: 0, marginBottom: '0.5rem',
-                textShadow: '0 1px 6px rgba(0,0,0,0.3)'
+                textShadow: '0 1px 6px rgba(0,0,0,0.3)', fontSize: '22px'
               }}>
-              TEAM HOP
-            </p>
-            <p className="text-xs sm:text-sm mb-3 sm:mb-5"
-              key={activeIndex}
-              style={{
+                TEAM HOP
+              </p>
+              <p key={activeIndex} style={{
                 color: 'white', opacity: 0.92, lineHeight: 1.6, margin: 0,
-                textShadow: '0 1px 4px rgba(0,0,0,0.25)',
-                fontStyle: 'italic', letterSpacing: '0.01em',
+                marginBottom: '1.25rem', textShadow: '0 1px 4px rgba(0,0,0,0.25)',
+                fontStyle: 'italic', letterSpacing: '0.01em', fontSize: '14px',
                 animation: 'punchlineFade 500ms ease forwards'
               }}>
-              {active.punchline}
-            </p>
-            <div className="flex items-center justify-between sm:justify-start gap-3 mt-1 w-full">
-              <div className="flex gap-3">
+                {active.punchline}
+              </p>
+              <div style={{ display: 'flex', gap: '0.75rem' }}>
                 {(['prev', 'next'] as Direction[]).map((dir) => (
                   <button key={dir} onClick={() => navigate(dir)}
                     aria-label={dir === 'prev' ? 'Previous figurine' : 'Next figurine'}
-                    className="w-11 h-11 sm:w-16 sm:h-16 flex items-center justify-center shrink-0 cursor-pointer"
                     style={{
-                      borderRadius: '50%',
+                      width: 64, height: 64, borderRadius: '50%',
                       background: 'transparent', border: '2px solid white', color: 'white',
-                      transition: 'transform 150ms, background-color 150ms'
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      cursor: 'pointer', transition: 'transform 150ms, background-color 150ms'
                     }}
                     onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.transform = 'scale(1.08)'; (e.currentTarget as HTMLButtonElement).style.backgroundColor = 'rgba(255,255,255,0.12)'; }}
                     onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.transform = 'scale(1)'; (e.currentTarget as HTMLButtonElement).style.backgroundColor = 'transparent'; }}>
-                    {dir === 'prev' ? (
-                      <ArrowLeft className="w-5 h-5 sm:w-[26px] sm:h-[26px]" strokeWidth={2.25} />
-                    ) : (
-                      <ArrowRight className="w-5 h-5 sm:w-[26px] sm:h-[26px]" strokeWidth={2.25} />
-                    )}
+                    {dir === 'prev' ? <ArrowLeft size={26} strokeWidth={2.25} /> : <ArrowRight size={26} strokeWidth={2.25} />}
                   </button>
                 ))}
               </div>
-
-              <button onClick={handleDiscover}
-                className="flex sm:hidden items-center gap-1 cursor-pointer opacity-95 hover:opacity-100 hover:translate-x-1 transition-all duration-200"
-                style={{
-                  fontFamily: "'Anton', sans-serif", fontSize: '20px',
-                  fontWeight: 400, color: 'white', letterSpacing: '-0.02em',
-                  lineHeight: 1, textTransform: 'uppercase', background: 'none', border: 'none',
-                  padding: 0
-                }}>
-                DISCOVER IT
-                <ArrowRight className="w-5 h-5" strokeWidth={2.25} />
-              </button>
             </div>
           </div>
 
-          {/* 6. Dot nav indicators */}
-          <div style={{
-            position: 'absolute', bottom: isMobile ? '10px' : '18px',
+          {/* 6. Dot nav indicators — desktop only (mobile has full-width card at bottom) */}
+          <div className="hidden sm:flex" style={{
+            position: 'absolute', bottom: '18px',
             left: '50%', transform: 'translateX(-50%)',
-            display: 'flex', gap: 10, zIndex: 60,
+            gap: 10, zIndex: 60,
             opacity: isPortalActive ? Math.max(0, 1 - smokeProgress * 3) : 1,
             transition: isPortalActive ? 'none' : 'opacity 300ms',
           }}>
