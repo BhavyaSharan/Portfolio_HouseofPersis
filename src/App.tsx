@@ -555,11 +555,10 @@ export default function ToonHub() {
           </div>
 
           {/* 5. Bottom-left info + nav */}
-          <div className="absolute bottom-6 left-4 sm:bottom-20 sm:left-24"
+          <div className="absolute bottom-6 left-4 right-4 p-3.5 sm:p-6 sm:bottom-20 sm:left-24 sm:right-auto sm:max-w-[320px]"
             style={{
-              zIndex: 60, maxWidth: 320, background: 'rgba(0,0,0,0.22)',
+              zIndex: 60, background: 'rgba(0,0,0,0.22)',
               backdropFilter: 'blur(6px)', WebkitBackdropFilter: 'blur(6px)', borderRadius: 16,
-              padding: isMobile ? '12px 14px' : '20px 24px',
               opacity: isPortalActive ? Math.max(0, 1 - smokeProgress * 3) : 1,
               pointerEvents: isPortalActive ? 'none' : 'auto',
               transition: isPortalActive ? 'none' : 'opacity 300ms'
@@ -572,31 +571,49 @@ export default function ToonHub() {
               }}>
               TEAM HOP
             </p>
-            <p className="text-xs sm:text-sm"
+            <p className="text-xs sm:text-sm mb-3 sm:mb-5"
               key={activeIndex}
               style={{
                 color: 'white', opacity: 0.92, lineHeight: 1.6, margin: 0,
-                marginBottom: isMobile ? '0.75rem' : '1.25rem', textShadow: '0 1px 4px rgba(0,0,0,0.25)',
+                textShadow: '0 1px 4px rgba(0,0,0,0.25)',
                 fontStyle: 'italic', letterSpacing: '0.01em',
                 animation: 'punchlineFade 500ms ease forwards'
               }}>
               {active.punchline}
             </p>
-            <div style={{ display: 'flex', gap: '0.75rem', marginTop: '0.25rem' }}>
-              {(['prev', 'next'] as Direction[]).map((dir) => (
-                <button key={dir} onClick={() => navigate(dir)}
-                  aria-label={dir === 'prev' ? 'Previous figurine' : 'Next figurine'}
-                  style={{
-                    width: isMobile ? 48 : 64, height: isMobile ? 48 : 64, borderRadius: '50%',
-                    background: 'transparent', border: '2px solid white', color: 'white',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    cursor: 'pointer', transition: 'transform 150ms, background-color 150ms', flexShrink: 0
-                  }}
-                  onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.transform = 'scale(1.08)'; (e.currentTarget as HTMLButtonElement).style.backgroundColor = 'rgba(255,255,255,0.12)'; }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.transform = 'scale(1)'; (e.currentTarget as HTMLButtonElement).style.backgroundColor = 'transparent'; }}>
-                  {dir === 'prev' ? <ArrowLeft size={26} strokeWidth={2.25} /> : <ArrowRight size={26} strokeWidth={2.25} />}
-                </button>
-              ))}
+            <div className="flex items-center justify-between sm:justify-start gap-3 mt-1 w-full">
+              <div className="flex gap-3">
+                {(['prev', 'next'] as Direction[]).map((dir) => (
+                  <button key={dir} onClick={() => navigate(dir)}
+                    aria-label={dir === 'prev' ? 'Previous figurine' : 'Next figurine'}
+                    className="w-11 h-11 sm:w-16 sm:h-16 flex items-center justify-center shrink-0 cursor-pointer"
+                    style={{
+                      borderRadius: '50%',
+                      background: 'transparent', border: '2px solid white', color: 'white',
+                      transition: 'transform 150ms, background-color 150ms'
+                    }}
+                    onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.transform = 'scale(1.08)'; (e.currentTarget as HTMLButtonElement).style.backgroundColor = 'rgba(255,255,255,0.12)'; }}
+                    onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.transform = 'scale(1)'; (e.currentTarget as HTMLButtonElement).style.backgroundColor = 'transparent'; }}>
+                    {dir === 'prev' ? (
+                      <ArrowLeft className="w-5 h-5 sm:w-[26px] sm:h-[26px]" strokeWidth={2.25} />
+                    ) : (
+                      <ArrowRight className="w-5 h-5 sm:w-[26px] sm:h-[26px]" strokeWidth={2.25} />
+                    )}
+                  </button>
+                ))}
+              </div>
+
+              <button onClick={handleDiscover}
+                className="flex sm:hidden items-center gap-1 cursor-pointer opacity-95 hover:opacity-100 hover:translate-x-1 transition-all duration-200"
+                style={{
+                  fontFamily: "'Anton', sans-serif", fontSize: '20px',
+                  fontWeight: 400, color: 'white', letterSpacing: '-0.02em',
+                  lineHeight: 1, textTransform: 'uppercase', background: 'none', border: 'none',
+                  padding: 0
+                }}>
+                DISCOVER IT
+                <ArrowRight className="w-5 h-5" strokeWidth={2.25} />
+              </button>
             </div>
           </div>
 
@@ -630,7 +647,7 @@ export default function ToonHub() {
           </div>
 
           {/* 7. DISCOVER IT */}
-          <div className="absolute bottom-6 right-4 sm:bottom-20 sm:right-10"
+          <div className="hidden sm:flex absolute bottom-20 right-10"
             style={{
               zIndex: 60,
               opacity: isPortalActive ? Math.max(0, 1 - smokeProgress * 3) : 1,
@@ -656,7 +673,7 @@ export default function ToonHub() {
                 b.style.transform = 'translateX(0)';
               }}>
               DISCOVER IT
-              <ArrowRight className="w-5 h-5 sm:w-8 sm:h-8" strokeWidth={2.25} />
+              <ArrowRight className="w-8 h-8" strokeWidth={2.25} />
             </button>
           </div>
 
