@@ -13,7 +13,7 @@ const IMAGES = [
     bg: '#F4845F', panel: '#F79B7F', label: 'BOY',
     name: 'Vivan Oberoi',
     punchline: 'Where code meets canvas and algorithms become art — Creative Tech',
-    dataIndex: 4,  // → PORTFOLIO_DATA[4] Luna Wei / Vivan
+    dataIndex: 3,  // → PORTFOLIO_DATA[3] Luna Wei / Vivan
   },
   {
     src: '/Sameera.png',
@@ -21,15 +21,7 @@ const IMAGES = [
     name: 'Sameera Abrar',
     punchline: 'Hijabi girl stuck in this paapi world',
     scaleOverride: 0.88,
-    dataIndex: 2,  // → PORTFOLIO_DATA[2] Sameera
-  },
-  {
-    src: '/Bhavya.png',
-    bg: '#2D2D2D', panel: '#3A3A3A', label: 'BOY',
-    name: 'Bhavya Sharan',
-    punchline: 'Baap ka dada ka bhai ka sabka website banayega re tera — Developer',
-    scaleOverride: 0.94,
-    dataIndex: 0,  // → PORTFOLIO_DATA[0] Bhavya
+    dataIndex: 1,  // → PORTFOLIO_DATA[1] Sameera
   },
   {
     src: '/SurekhaKR.png',
@@ -37,7 +29,7 @@ const IMAGES = [
     name: 'Sureka KR',
     punchline: 'Just a girl surviving in a world that desperately needs better content.',
     scaleOverride: 0.82,
-    dataIndex: 1,  // → PORTFOLIO_DATA[1] Surekha
+    dataIndex: 0,  // → PORTFOLIO_DATA[0] Surekha
   },
   {
     src: '/Niraj.png',
@@ -45,7 +37,7 @@ const IMAGES = [
     name: 'Niraj Bhoite',
     punchline: 'Smile Karo, Baaki Editing main Sambhalenge!',
     scaleOverride: 0.90,
-    dataIndex: 3,  // → PORTFOLIO_DATA[3] Niraj
+    dataIndex: 2,  // → PORTFOLIO_DATA[2] Niraj
   },
 ];
 
@@ -394,7 +386,8 @@ export default function ToonHub() {
 
   const active = IMAGES[activeIndex];
   const isPortalActive = portalPhase !== 'idle' || animPhaseRef.current !== 'idle';
-  const smokeAccent = isPortalActive ? IMAGES[portalIndex].bg : active.bg;
+  const portalImage = IMAGES.find(img => img.dataIndex === portalIndex);
+  const smokeAccent = isPortalActive ? (portalImage ? portalImage.bg : active.bg) : active.bg;
 
   return (
     <>
@@ -522,7 +515,7 @@ export default function ToonHub() {
                   onClick={() => {
                     if (isCenter && !isPortalActive) handleDiscover();
                     else if (!isPortalActive && !isCarouselAnimating) {
-                      const diff = (i - activeIndex + 5) % 5;
+                      const diff = (i - activeIndex + N) % N;
                       navigate(diff === 1 ? 'next' : 'prev');
                     }
                   }}
@@ -682,9 +675,9 @@ export default function ToonHub() {
                 key={di}
                 onClick={() => {
                   if (isCarouselAnimating || isPortalActive) return;
-                  const diff = (di - activeIndex + 5) % 5;
+                  const diff = (di - activeIndex + N) % N;
                   if (diff === 0) return;
-                  navigate(diff <= 2 ? 'next' : 'prev');
+                  navigate(diff <= Math.floor(N / 2) ? 'next' : 'prev');
                 }}
                 style={{
                   width: di === activeIndex ? 28 : 8,
