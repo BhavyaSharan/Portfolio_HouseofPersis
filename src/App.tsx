@@ -41,7 +41,7 @@ const IMAGES = [
   },
   {
     src: '/Bhavya.png',
-    bg: '#E8A020', panel: '#F0B840', label: 'BOY',
+    bg: '#0a0a0a', panel: '#1a1a1a', label: 'BOY',
     name: 'Bhavya Sharan',
     punchline: 'Turning ideas into digital reality — one line of code at a time.',
     scaleOverride: 0.88,

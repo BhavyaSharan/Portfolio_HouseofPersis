@@ -139,11 +139,11 @@ export const PORTFOLIO_DATA = [
       'UI/UX Engineering',
     ],
     works: [
-      { title: 'Portfolio Platforms', type: 'Web Development', accent: '#E8A020' },
-      { title: 'CMS & Admin Panels', type: 'Full-Stack', accent: '#D4911A' },
-      { title: 'Booking & Funnel Systems', type: 'SaaS Products', accent: '#C07F10' },
-      { title: 'Investor Dashboards', type: 'Data Platforms', accent: '#A66D00' },
-      { title: 'Landing Pages', type: 'Conversion Design', accent: '#F0B840' },
+      { title: 'Portfolio Platforms', type: 'Web Development', accent: '#A0A0A0' },
+      { title: 'CMS & Admin Panels', type: 'Full-Stack', accent: '#888888' },
+      { title: 'Booking & Funnel Systems', type: 'SaaS Products', accent: '#C0C0C0' },
+      { title: 'Investor Dashboards', type: 'Data Platforms', accent: '#707070' },
+      { title: 'Landing Pages', type: 'Conversion Design', accent: '#D0D0D0' },
     ],
     experience: [
       {
@@ -154,7 +154,7 @@ export const PORTFOLIO_DATA = [
       },
     ],
     socials: { github: '#', twitter: '#', linkedin: '#', web: '#' },
-    accentBg: '#E8A020',
+    accentBg: '#0a0a0a',
   },
 ];
 
