@@ -122,6 +122,40 @@ export const PORTFOLIO_DATA = [
     socials: { github: '#', twitter: '#', linkedin: '#', web: '#' },
     accentBg: '#F4845F',
   },
+  {
+    name: 'Bhavya Sharan',
+    role: 'Full-Stack Developer',
+    tagline: 'Turning ideas into digital reality — one line of code at a time.',
+    description:
+      'I build high-performance web applications and digital platforms that blend clean engineering with stunning design. From intuitive frontends to robust backends and CMS systems, I craft experiences that not only work — they wow.',
+    skills: [
+      'React & Next.js',
+      'TypeScript',
+      'Node.js & Express',
+      'Firebase & Supabase',
+      'Tailwind CSS',
+      'REST & GraphQL APIs',
+      'CI/CD & DevOps',
+      'UI/UX Engineering',
+    ],
+    works: [
+      { title: 'Portfolio Platforms', type: 'Web Development', accent: '#E8A020' },
+      { title: 'CMS & Admin Panels', type: 'Full-Stack', accent: '#D4911A' },
+      { title: 'Booking & Funnel Systems', type: 'SaaS Products', accent: '#C07F10' },
+      { title: 'Investor Dashboards', type: 'Data Platforms', accent: '#A66D00' },
+      { title: 'Landing Pages', type: 'Conversion Design', accent: '#F0B840' },
+    ],
+    experience: [
+      {
+        company: 'House of Persis',
+        role: 'Lead Developer',
+        period: 'Current',
+        desc: 'Building the full digital infrastructure for HOP — from the agency portfolio and booking flows to investor dashboards, CMS systems, and marketing automation. Every pixel and every endpoint, engineered for impact.',
+      },
+    ],
+    socials: { github: '#', twitter: '#', linkedin: '#', web: '#' },
+    accentBg: '#E8A020',
+  },
 ];
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────

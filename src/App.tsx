@@ -39,6 +39,14 @@ const IMAGES = [
     scaleOverride: 0.90,
     dataIndex: 2,  // → PORTFOLIO_DATA[2] Niraj
   },
+  {
+    src: '/Bhavya.png',
+    bg: '#E8A020', panel: '#F0B840', label: 'BOY',
+    name: 'Bhavya Sharan',
+    punchline: 'Turning ideas into digital reality — one line of code at a time.',
+    scaleOverride: 0.88,
+    dataIndex: 4,  // → PORTFOLIO_DATA[4] Bhavya
+  },
 ];
 
 const GRAIN_SVG = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E`;
